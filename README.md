@@ -25,6 +25,7 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | [`heartbeat-discipline.md`](./heartbeat-discipline.md) | Write the timestamp. Persistence is the only habit that scales. |
 | [`lists-are-editorial.md`](./lists-are-editorial.md) | A list's bar is "recommend without reservation", not "I use daily". 4-level engagement scale. |
 | [`star-before-you-curate.md`](./star-before-you-curate.md) | GitHub UserLists API lets you add to a list without starring. Don't. Star first, then list. |
+| [`after-the-fact-update-everywhere.md`](./after-the-fact-update-everywhere.md) | When a fact changes, update every public artifact that references it in the same change set. |
 
 ## What's not here
 
