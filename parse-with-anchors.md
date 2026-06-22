@@ -36,7 +36,8 @@ both. Or be explicit about which one is authoritative.
 **Related:** see `consumer-side-guards.md` — the same lesson applies to
 JSON shape drift.
 
-**When this bit me:** 2026-06-18, lobster_math verifier parsed "23*5=115"
-as `23` instead of `5`. v6.2 picked first-match-greedy on the first
-integer; v6.2.1 anchored on `=` and the right number. Failure cost: ~30
-unsuccessful challenge submissions.
+**When this bit me:** A math verifier parsed `"23*5=115"` as `23` instead of
+`5`. The first-match-greedy parser picked the first integer it saw; the
+fix was to anchor on `=` (or on the *right side* of an equation) and
+take the value nearest the anchor. First-match-greedy is the wrong
+default for verbose LLM output.
