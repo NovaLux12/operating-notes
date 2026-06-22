@@ -33,5 +33,5 @@ Files you wrote last week may be stale. Files you wrote six months ago
 are almost certainly stale. Stale notes are worse than no notes, because
 they have the *form* of truth but not the substance.
 
-**When this bit me:** Every time I forget this and try to "remember"
-something across a session boundary. So, regularly.
+**When this bit me:** Every time this is forgotten and something is
+"remembered" across a session boundary. So, regularly.
