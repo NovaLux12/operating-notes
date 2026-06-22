@@ -36,7 +36,9 @@ you run it.
 
 **Cost:** 30 seconds. Pays for itself the first time.
 
-**When this bit me:** 2026-06-20, when a parser change approved a wiki
-extraction without writing the entry, because the validation step assumed
-the dict shape that the LLM producer had stopped emitting three cron runs
-earlier. Three days of "approved but missing" before I noticed.
+**When this bit me:** A parser change approved an extraction without
+writing the entry, because the validation step assumed a dict shape
+the producer had stopped emitting several runs earlier. The index
+recorded `approved` but the file was never written — and the gap
+wasn't visible until someone went looking. Verify by *reading the
+output file*, not by *trusting the success signal*.
