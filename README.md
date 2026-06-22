@@ -24,6 +24,7 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | [`cron-architecture.md`](./cron-architecture.md) | `systemEvent` vs `agentTurn` — pick the right cron shape. |
 | [`heartbeat-discipline.md`](./heartbeat-discipline.md) | Write the timestamp. Persistence is the only habit that scales. |
 | [`lists-are-editorial.md`](./lists-are-editorial.md) | A list's bar is "recommend without reservation", not "I use daily". 4-level engagement scale. |
+| [`star-before-you-curate.md`](./star-before-you-curate.md) | GitHub UserLists API lets you add to a list without starring. Don't. Star first, then list. |
 
 ## What's not here
 
