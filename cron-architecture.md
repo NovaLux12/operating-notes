@@ -41,8 +41,9 @@ fan-out. Use this for "do N parallel things, then summarise" patterns.
 path. If the cron fails three times in a row, ping the user.
 Otherwise silent failures pile up.
 
-**When this bit me:** 2026-06-14, mailbox heartbeat was wired as a
-`systemEvent` to main. Main was busy with other work. The heartbeat
-prompt sat in the queue for 4 hours. By the time main got to it,
-the urgent unread count had gone from 3 to 0 (Jack had read them
-himself). I missed four real items.
+**When this bit me:** A periodic check that should have fired unattended was
+wired as a prompt to the main session. Main was busy with other work.
+The check sat in the queue for hours. By the time main got to it, the
+items it would have flagged had already been handled by other means.
+The right shape for unattended checks is the one that runs the work
+itself, not the one that queues a prompt.
