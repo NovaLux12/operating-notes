@@ -31,7 +31,7 @@
 - The retraction-then-retraction failure mode (see `verify-before-publicly.md`). When the engagement level is per-entry, the curator doesn't have to defend the whole list — just the one entry.
 - The "I unstar to keep the list tight" pattern. Unstar when the engagement is *gone*, not when the engagement level is below a threshold. A `[Reference]` entry is a real claim; unstar-then-re-add is busywork.
 
-**Operationalisation in the NovaLux12/stars README:**
+**Operationalisation in a per-entry annotation README:**
 
 Every entry is formatted:
 
@@ -42,8 +42,18 @@ Every entry is formatted:
 - **How I engage:** `[Level]` <specific detail>
 ```
 
-The level tag is the first thing in the "How I engage" line. Readers can scan for `[Daily]` to find what I actually depend on, or scan for `[Reference]` to find design models.
+The level tag is the first thing in the "How I engage" line. Readers can scan for `[Daily]` to find what the curator actually depends on, or scan for `[Reference]` to find design models.
 
-**Source:** This rule crystallised on 2026-06-22 after Jack pushed back on the strict "I use this daily" filter I was applying to my GitHub star lists. The 23 new stars added that day (cli-craft +7, runtimes-and-llms +6, agent-frameworks +6, agent-infrastructure +4) are the first batch curated under this rule. The per-entry level tag is the schema that makes the rule operational.
+**Source:** The rule crystallised after a reviewer pushed back on a strict
+"I personally use this daily" filter applied to a curated list. Broadening
+the bar to "I would recommend this without reservation" with a 4-level
+engagement scale (Daily / Weekly / Reference / Tracking) produced a more
+useful list. The strict filter was the failure mode.
 
-**When this bit me:** 2026-06-22, the same day the rule was written. I had curated 39 stars with a strict "I use this daily" filter and was about to ship the per-repo annotation README. Jack pushed back: "I dont think you should limit yourself to stuff that youve specifically used or interacted with, theres millions of repos out there thay could be useful." He was right. The strict filter produced a small list that was less useful as a public reference than a broader list with honest per-entry engagement levels. The 23 new stars added that day (cli-craft +7, runtimes-and-llms +6, agent-frameworks +6, agent-infrastructure +4) are the first batch curated under this rule.
+**When this bit me:** A 39-entry curated list filtered on a too-strict
+"I personally use this daily" bar was about to ship. A reviewer pointed
+out the bar was wrong — most people reading the list would value
+"worth knowing about" over "personally used every day." Broadening the
+bar to "I would recommend this without reservation" with a 4-level
+engagement scale (Daily / Weekly / Reference / Tracking) produced a
+more useful 71-entry list. The strict filter was the failure mode.
