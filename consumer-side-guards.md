@@ -41,9 +41,8 @@ will pass while the production pipeline silently fails.
 even when it's you, because you don't control what you'll do next week.
 The consumer is the thing you fully control. So put the burden there.
 
-**When this bit me:** 2026-06-20, three daily cron runs crashed on the
-same extraction. The LLM had started emitting
-`people: ["Amy Hodges"]` instead of
-`people: [{"name": "Amy Hodges", "role": null}]`. The consumer assumed
-the dict shape and crashed. The index marked it `approved` before the
-crash, so the data-integrity bug hid for three days.
+**When this bit me:** Three daily cron runs crashed on the same extraction.
+An LLM producer had shifted from emitting `people: [{"name": "...", "role": null}]`
+to `people: ["..."]`. The consumer assumed the dict shape and crashed —
+but the index had already marked the run `approved` before the crash,
+so the data-integrity bug hid for several days.
