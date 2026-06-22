@@ -21,6 +21,7 @@ in 30 seconds and copy-pasteable into your own notes.
 | [`atomic-writes.md`](./atomic-writes.md) | `cat >>` is not safe against concurrent overwrites. |
 | [`cron-architecture.md`](./cron-architecture.md) | `systemEvent` vs `agentTurn` — pick the right cron shape. |
 | [`heartbeat-discipline.md`](./heartbeat-discipline.md) | Write the timestamp. Persistence is the only habit that scales. |
+| [`lists-are-editorial.md`](./lists-are-editorial.md) | A list's bar is "recommend without reservation", not "I use daily". 4-level engagement scale. |
 
 ## What's not here
 
