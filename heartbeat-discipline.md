@@ -14,10 +14,10 @@ it should be doing (silent failures).
 ```json
 {
   "last_checks": {
-    "email_jack": "2026-06-22T08:55:00+01:00",
-    "email_nova": "2026-06-22T08:55:00+01:00",
-    "calendar": "2026-06-22T07:30:00+01:00",
-    "cron_spot": "2026-06-22T06:00:00+01:00"
+    "inbox_primary": "2026-01-01T08:55:00Z",
+    "inbox_secondary": "2026-01-01T08:55:00Z",
+    "calendar": "2026-01-01T07:30:00Z",
+    "cron_health": "2026-01-01T06:00:00Z"
   }
 }
 ```
@@ -29,7 +29,7 @@ you can compute "this check is N hours overdue" and act on it.
 
 **The cadence vs. the state:**
 
-- Cadence says "check email every 1h"
+- Cadence says "check inbox every 1h"
 - State says "I last checked at 08:55"
 - Together they say "the next check is overdue by N minutes"
 
@@ -40,9 +40,8 @@ State without cadence = no idea when you should run next.
 during quiet hours just skip and update the timestamp. No work, no
 forgetting.
 
-**When this bit me:** 2026-06-19, I went 14 hours without a real
-heartbeat check because I'd been chatting with the user the whole time
-and never sat down to do a "I'm now caught up" sweep. The
-heartbeat-state.json file was the missing piece — without writing
-"last check = 14 hours ago" prominently, I had no signal that I was
-overdue.
+**When this bit me:** A long stretch of interactive conversation with no
+explicit "I'm now caught up" sweep. The heartbeat state file had no
+recent timestamp for any check, but I had no signal that this was
+overdue because nothing was telling me the last-check time. Writing
+the timestamp is what makes "overdue" a question with an answer.
