@@ -39,7 +39,7 @@ old version or the new version, never a partial write.
 - Use a session-scoped file path (`memory/2026-06-22-1430.md`) when
   you're not sure if a parent session is mid-reconstruction
 
-**When this bit me:** 2026-06-16, two of three WAL entries were silently
-dropped because a 19:40-session reconstruction overlapped with my 20:00
-and 20:10 `cat >>` calls. The 20:15 entry survived. Took me an hour
-to reconstruct.
+**When this bit me:** A session-reconstruction routine overlapped with three
+scheduled `cat >>` appends. Two of three WAL entries were silently
+dropped — `cat >>` is unsafe against any other writer, including a
+non-obvious one like a recovery loop.
