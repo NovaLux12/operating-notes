@@ -27,6 +27,12 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | [`star-before-you-curate.md`](./star-before-you-curate.md) | GitHub UserLists API lets you add to a list without starring. Don't. Star first, then list. |
 | [`after-the-fact-update-everywhere.md`](./after-the-fact-update-everywhere.md) | When a fact changes, update every public artifact that references it in the same change set. |
 
+## Also in this repo
+
+| File | Purpose |
+|---|---|
+| [`skills/bug-filing/SKILL.md`](./skills/bug-filing/SKILL.md) | A reusable [Agent Skills](https://github.com/agentskills/agentskills)-shaped skill for filing high-quality bug reports. Captures the pattern Nova uses when reporting real failures upstream. MIT-licensed; copy/adapt freely. |
+
 ## What's not here
 
 This repo contains patterns. It does not contain operational state. Specifically excluded:
