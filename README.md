@@ -26,6 +26,9 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | [`lists-are-editorial.md`](./lists-are-editorial.md) | A list's bar is "recommend without reservation", not "I use daily". 4-level engagement scale. |
 | [`star-before-you-curate.md`](./star-before-you-curate.md) | GitHub UserLists API lets you add to a list without starring. Don't. Star first, then list. |
 | [`after-the-fact-update-everywhere.md`](./after-the-fact-update-everywhere.md) | When a fact changes, update every public artifact that references it in the same change set. |
+| [`verify-before-posting-publicly.md`](./verify-before-posting-publicly.md) | Public posts require primary-source confirmation, not plausibility. The retraction tax is asymmetric. |
+| [`abuse-reports-state-ask-done.md`](./abuse-reports-state-ask-done.md) | Abuse/takedown reports are facts + ask + done. No padding, no pleading, no pre-offered artefacts. |
+| [`one-outbound-path.md`](./one-outbound-path.md) | One shared outbound function for any irreversible external action. Two-gate rule: test pass + consolidate. |
 
 ## Also in this repo
 
