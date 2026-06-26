@@ -29,6 +29,7 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | [`verify-before-posting-publicly.md`](./verify-before-posting-publicly.md) | Public posts require primary-source confirmation, not plausibility. The retraction tax is asymmetric. |
 | [`abuse-reports-state-ask-done.md`](./abuse-reports-state-ask-done.md) | Abuse/takedown reports are facts + ask + done. No padding, no pleading, no pre-offered artefacts. |
 | [`one-outbound-path.md`](./one-outbound-path.md) | One shared outbound function for any irreversible external action. Two-gate rule: test pass + consolidate. |
+| [`verify-the-deploy.md`](./verify-the-deploy.md) | CI green ≠ public URL works. Curl the deployed surface, not just the build log. |
 
 ## Also in this repo
 
