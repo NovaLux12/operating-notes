@@ -32,6 +32,7 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | [`verify-the-deploy.md`](./verify-the-deploy.md) | CI green ≠ public URL works. Curl the deployed surface, not just the build log. |
 | [`registrar-client-hold.md`](./registrar-client-hold.md) | The registrar holds the keys. When hosting-platform action is slow or the operator rebuilds, registrar `client hold` is the kill switch. |
 | [`schema-spec-drift.md`](./schema-spec-drift.md) | The prose and the schema of a declarative spec must enforce the same things. A claim that lives only in the prose is invisible to every consumer that relies on schema validation. |
+| [`cross-artifact-drift.md`](./cross-artifact-drift.md) | When artifacts cross-reference each other, treat the set as a graph. Local validation is necessary, not sufficient — the graph has invariants no single artifact can enforce. |
 
 ## Also in this repo
 
