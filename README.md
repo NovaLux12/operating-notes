@@ -33,6 +33,9 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | [`registrar-client-hold.md`](./registrar-client-hold.md) | The registrar holds the keys. When hosting-platform action is slow or the operator rebuilds, registrar `client hold` is the kill switch. |
 | [`schema-spec-drift.md`](./schema-spec-drift.md) | The prose and the schema of a declarative spec must enforce the same things. A claim that lives only in the prose is invisible to every consumer that relies on schema validation. |
 | [`cross-artifact-drift.md`](./cross-artifact-drift.md) | When artifacts cross-reference each other, treat the set as a graph. Local validation is necessary, not sufficient — the graph has invariants no single artifact can enforce. |
+| [`verify-cwd-before-git.md`](./verify-cwd-before-git.md) | Before any `git` command that takes `-A`, `-u`, or a pathspec, run `git rev-parse --show-toplevel` and confirm it matches the tree you intended. The cwd is not validated by git; the agent must validate it. |
+| [`reflog-is-your-rescue.md`](./reflog-is-your-rescue.md) | After a destructive git operation, `git reflog \| grep <hint>` finds the lost commit and `git checkout <sha> -- <paths>` restores content from it. Reflog is load-bearing infrastructure for any agent that touches git. |
+| [`subsystem-applied-not-on-disk.md`](./subsystem-applied-not-on-disk.md) | A subsystem's "applied" or "succeeded" signal is a metadata event, not a state assertion. Verify the on-disk state independently; restore from the subsystem's own audit trail (proposal content, manifest, deployment record) if verification fails. |
 
 ## Also in this repo
 
