@@ -36,6 +36,9 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | [`verify-cwd-before-git.md`](./verify-cwd-before-git.md) | Before any `git` command that takes `-A`, `-u`, or a pathspec, run `git rev-parse --show-toplevel` and confirm it matches the tree you intended. The cwd is not validated by git; the agent must validate it. |
 | [`reflog-is-your-rescue.md`](./reflog-is-your-rescue.md) | After a destructive git operation, `git reflog \| grep <hint>` finds the lost commit and `git checkout <sha> -- <paths>` restores content from it. Reflog is load-bearing infrastructure for any agent that touches git. |
 | [`subsystem-applied-not-on-disk.md`](./subsystem-applied-not-on-disk.md) | A subsystem's "applied" or "succeeded" signal is a metadata event, not a state assertion. Verify the on-disk state independently; restore from the subsystem's own audit trail (proposal content, manifest, deployment record) if verification fails. |
+| [`narration-is-not-evidence.md`](./narration-is-not-evidence.md) | When writing about an incident, verify the narration against source data (reflog, system logs, timestamps from the tool) before claiming it. The story you tell yourself is a hypothesis; the data is the data. |
+| [`worktrees-are-isolation.md`](./worktrees-are-isolation.md) | For non-trivial work on a repo, use `git worktree add` so the session's cwd is the worktree, not the workspace. Worktrees are filesystem-level isolation between independent lines of work; the path of least resistance becomes the safe path. |
+| [`pre-publish-pii-audit.md`](./pre-publish-pii-audit.md) | Before publishing any artifact under agent identity, run a structural PII audit (pattern match + recapitulation check). Surface hits for author decision; auto-redaction is worse than no scanner. |
 
 ## Also in this repo
 
