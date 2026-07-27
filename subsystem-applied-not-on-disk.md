@@ -1,4 +1,5 @@
 # subsystem-applied-not-on-disk
+*Added: 2026-07-22*
 
 **Rule:** When any subsystem — a skill-management system, a deployment tool, a config-mutation framework, a sync layer — claims an action "applied," "succeeded," or "merged," treat that claim as a *metadata event*, not as a state assertion. The subsystem's record of success is one source of truth; the on-disk state is another. Verify the on-disk state independently before relying on it. If verification fails, restore from the subsystem's own audit trail (proposal content, manifest, deployment record), not from a re-run of the apply step.
 
@@ -36,7 +37,7 @@ The pattern: **subsystems that claim "applied" must record the content they inte
 - **Git workflows (push, PR merge, force-push):** the remote reflog is shorter-lived than local reflog, but GitHub Actions, GitLab CI, and similar tools record workflow runs. Restoration: re-run the workflow with a manual dispatch.
 - **Sync layers (file sync, cloud-storage backup):** record last-known state. Restoration: re-trigger the sync. But verify the *direction* of the sync — a sync from a now-empty local to a populated remote will *delete* the remote.
 
-**When this rule applies most:**
+## When this rule applies most
 
 - Any subsystem that emits a "success" event the agent trusts without verification.
 - Skills, configs, dotfiles, deployment manifests, package versions, container images — anything that affects on-disk state and is managed by an external subsystem.
@@ -56,4 +57,6 @@ The pattern: **subsystems that claim "applied" must record the content they inte
 
 **Cost:** 5 seconds per apply to spot-check the on-disk state. Pays for itself the first time the spot-check fails.
 
-**When this bit me:** A `skill_workshop` proposal for a `wrap-up` SKILL.md was marked `[applied]` at 15:09 BST with the post-apply content hash recorded in `proposal.json`. Between 15:43 and 15:57 BST, the `skills/wrap-up/SKILL.md` file silently disappeared from disk. A subsequent attempt to use the skill failed with "skill not found." The subsystem's metadata claimed the file was applied; the filesystem disagreed. The recovery was `cp $HOME/.openclaw/skill-workshop/proposals/wrap-up-20260719-247b1eb8e2/PROPOSAL.md /home/jack/.../skills/wrap-up/SKILL.md` — restoration from the subsystem's own audit trail, hash-verified against `proposal.json.draftHash`. The file appeared; the auto-registered skills count jumped from 44/77 to 45/78; the agent's wrap-up workflow worked again. Without the proposal content, the recovery would have been either a re-proposal (slow, requires re-review) or a manual reconstruction from memory (lossy, error-prone). The lesson: the subsystem *did* record the right content; the filesystem *did not* have the right effect. Recovery came from the subsystem's own audit trail, not from re-application.
+## When this bit me
+
+A `skill_workshop` proposal for a `wrap-up` SKILL.md was marked `[applied]` at 15:09 BST with the post-apply content hash recorded in `proposal.json`. Between 15:43 and 15:57 BST, the `skills/wrap-up/SKILL.md` file silently disappeared from disk. A subsequent attempt to use the skill failed with "skill not found." The subsystem's metadata claimed the file was applied; the filesystem disagreed. The recovery was `cp $HOME/.openclaw/skill-workshop/proposals/wrap-up-20260719-247b1eb8e2/PROPOSAL.md /home/jack/.../skills/wrap-up/SKILL.md` — restoration from the subsystem's own audit trail, hash-verified against `proposal.json.draftHash`. The file appeared; the auto-registered skills count jumped from 44/77 to 45/78; the agent's wrap-up workflow worked again. Without the proposal content, the recovery would have been either a re-proposal (slow, requires re-review) or a manual reconstruction from memory (lossy, error-prone). The lesson: the subsystem *did* record the right content; the filesystem *did not* have the right effect. Recovery came from the subsystem's own audit trail, not from re-application.

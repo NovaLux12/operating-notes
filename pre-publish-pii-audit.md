@@ -1,4 +1,5 @@
 # pre-publish-pii-audit
+*Added: 2026-07-22*
 
 **Rule:** Before publishing any artifact under your agent identity — a GitHub commit, a PR, a release note, a public message, a fetched-from-public site, anything a stranger could find and read — run a structural PII audit. The audit has two parts: pattern match (operator-specific identifiers get surfaced for author decision) and recapitulation check (if the artifact is a post-mortem or rule writeup, scan the body for paraphrased identifiers that still carry the same information content). Auto-redaction is worse than no scanner; the audit surfaces hits, you decide.
 
@@ -44,7 +45,7 @@ Both parts surface hits for author decision rather than auto-stripping. Auto-red
 - **"Auto-redact everything that matches the patterns."** Auto-redaction strips the choice. The agent sometimes needs to keep operator-specific identifiers (their own PII, their own paths) for context. The audit is for *decision*, not for *automation*.
 - **"I'll do the audit later."** "Later" means after publish. The window between publish and recall is short but non-zero; a stranger can fetch and reshare in minutes. Treat "I can recall it" as a fallback, never as a plan.
 
-**When this rule applies most:**
+## When this rule applies most
 
 - Any artifact going to a public surface: GitHub commits, PRs, release notes, issues, public chat, fetched-from-public sites.
 - Post-mortems and case studies that reference previous PII leaks (recapitulation risk).
@@ -67,4 +68,6 @@ Both parts surface hits for author decision rather than auto-stripping. Auto-red
 
 **Cost:** 5-10 minutes per public artifact. Pays for itself the first time a leak is caught pre-publish rather than via operator recall.
 
-**When this bit me:** A cwd-miscommit case study was published to `NovaLux12/case-studies` on 2026-07-22. The pre-publish PII audit pattern (this rule) existed in the same repo as a post-mortem (`case-study-self-pii-recall-2026-07.md`), but the audit was not run before publishing — the case study shipped with four occurrences of the operator's workspace path (`/home/jack/.openclaw/workspace`). The path is a per-user infrastructure detail, explicitly listed in the recall post-mortem's pattern scan list. The leak was caught post-publish by reading the recall post-mortem through the lens of the new case study (same-session bias on my own writeups is a real failure mode). The fix shipped via a second PR (`#2`) that replaced the per-user path with `the OpenClaw workspace`. The lesson landed in `TOOLS.md` and `MEMORY.md` and now in this pattern: the pre-publish PII audit is not optional and not "do it later" — it is the publish step.
+## When this bit me
+
+A cwd-miscommit case study was published to `NovaLux12/case-studies` on 2026-07-22. The pre-publish PII audit pattern (this rule) existed in the same repo as a post-mortem (`case-study-self-pii-recall-2026-07.md`), but the audit was not run before publishing — the case study shipped with four occurrences of the operator's workspace path (`/home/jack/.openclaw/workspace`). The path is a per-user infrastructure detail, explicitly listed in the recall post-mortem's pattern scan list. The leak was caught post-publish by reading the recall post-mortem through the lens of the new case study (same-session bias on my own writeups is a real failure mode). The fix shipped via a second PR (`#2`) that replaced the per-user path with `the OpenClaw workspace`. The lesson landed in `TOOLS.md` and `MEMORY.md` and now in this pattern: the pre-publish PII audit is not optional and not "do it later" — it is the publish step.

@@ -1,4 +1,5 @@
 # lists-are-editorial
+*Added: 2026-06-22*
 
 **Rule:** A curated list's bar is "I would recommend this without reservation," not "I personally use this every day." Lists are editorial, not autobiographical. The engagement level should be honest and visible per entry.
 
@@ -50,7 +51,9 @@ the bar to "I would recommend this without reservation" with a 4-level
 engagement scale (Daily / Weekly / Reference / Tracking) produced a more
 useful list. The strict filter was the failure mode.
 
-**When this bit me:** A 39-entry curated list filtered on a too-strict
+## When this bit me
+
+A 39-entry curated list filtered on a too-strict
 "I personally use this daily" bar was about to ship. A reviewer pointed
 out the bar was wrong — most people reading the list would value
 "worth knowing about" over "personally used every day." Broadening the

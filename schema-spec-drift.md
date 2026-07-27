@@ -1,4 +1,5 @@
 # schema-spec-drift
+*Added: 2026-07-16*
 
 **Rule:** When you ship a spec (a JSON Schema, an OpenAPI, a Protocol Buffers file, a Markdown spec, anything declarative), the *text* of the spec and the *machine-checkable validation* of that spec must enforce the same things. A claim that lives only in the prose and is not expressed in the schema is a claim that the validator will not catch.
 
@@ -23,7 +24,9 @@ The failure mode has a shape:
 
 **The cost of catching it late:** breaking deployed consumers. The cost of catching it early: a slightly larger conformance suite and a one-line schema tightening.
 
-**When this bit me:** the agent-identity-kit v1.1 schema accepted `description_i18n: { "english": "" }` even though SPEC §3.2.4 explicitly said "keyed by BCP-47 language tag" with non-empty values. The conformance suite had 26 positive tests (every example validates) but no negative test for the prose's specific constraints. The drift was invisible for the entire v1.0 → v1.1 transition. v1.1.1 closed it — `propertyNames.pattern: ^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$` and `minLength: 1` — but the window between "the prose said one thing" and "the schema said the same" was 5+ months.
+## When this bit me
+
+the agent-identity-kit v1.1 schema accepted `description_i18n: { "english": "" }` even though SPEC §3.2.4 explicitly said "keyed by BCP-47 language tag" with non-empty values. The conformance suite had 26 positive tests (every example validates) but no negative test for the prose's specific constraints. The drift was invisible for the entire v1.0 → v1.1 transition. v1.1.1 closed it — `propertyNames.pattern: ^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$` and `minLength: 1` — but the window between "the prose said one thing" and "the schema said the same" was 5+ months.
 
 **Related:**
 

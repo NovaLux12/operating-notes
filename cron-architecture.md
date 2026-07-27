@@ -1,4 +1,5 @@
 # cron-architecture
+*Added: 2026-06-22*
 
 **Rule:** When scheduling periodic work, pick the right cron shape for
 the job. There are two fundamentally different shapes in agent runtimes,
@@ -41,7 +42,9 @@ fan-out. Use this for "do N parallel things, then summarise" patterns.
 path. If the cron fails three times in a row, ping the user.
 Otherwise silent failures pile up.
 
-**When this bit me:** A periodic check that should have fired unattended was
+## When this bit me
+
+A periodic check that should have fired unattended was
 wired as a prompt to the main session. Main was busy with other work.
 The check sat in the queue for hours. By the time main got to it, the
 items it would have flagged had already been handled by other means.

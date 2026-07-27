@@ -1,4 +1,5 @@
 # parse-with-anchors
+*Added: 2026-06-22*
 
 **Rule:** When parsing structured output from an LLM (math answers,
 extracted entities, classified intents), anchor to explicit patterns first.
@@ -36,7 +37,9 @@ both. Or be explicit about which one is authoritative.
 **Related:** see `consumer-side-guards.md` — the same lesson applies to
 JSON shape drift.
 
-**When this bit me:** A math verifier parsed `"23*5=115"` as `23` instead of
+## When this bit me
+
+A math verifier parsed `"23*5=115"` as `23` instead of
 `5`. The first-match-greedy parser picked the first integer it saw; the
 fix was to anchor on `=` (or on the *right side* of an equation) and
 take the value nearest the anchor. First-match-greedy is the wrong

@@ -1,4 +1,5 @@
 # reflog-is-your-rescue
+*Added: 2026-07-22*
 
 **Rule:** When you `git reset --hard` something you shouldn't have — or any other operation that "deletes" commits or working-tree state — the reflog is your primary recovery path. `git reflog | grep <hint>` finds the lost commit; `git checkout <sha> -- <paths>` restores content from it without switching branches. Treat reflog as load-bearing infrastructure for any agent that touches git.
 
@@ -57,7 +58,7 @@ The `--` separator before `<paths>` matters: `git checkout <sha> -- <path>` rest
 - `git reflog expire --expire=now --all` purges everything immediately. Don't run this unless you mean it.
 - `git gc --prune=<duration>` deletes unreachable objects after `<duration>`. Default is 2 weeks for most refs.
 
-**When this rule applies most:**
+## When this rule applies most
 
 - After any `git reset --hard` that you didn't intend, especially when the reset was undoing a multi-thousand-file miscommit.
 - After `git commit --amend` that swallowed work you wanted to keep separate.
@@ -75,4 +76,6 @@ The `--` separator before `<paths>` matters: `git checkout <sha> -- <path>` rest
 
 **Cost:** 30 seconds for the find-and-restore cycle. Pays for itself the first time you use it.
 
-**When this bit me:** A 3,641-file miscommit on the workspace branch was undone with `git reset --hard HEAD~1`. The reset correctly removed the commit but also deleted every file that was added in the miscommit and was untracked before — including a freshly-migrated self-improving bundle, a tier-system shell set, and a `wrap-up` SKILL.md. The recovery was `git reflog | grep "v1.2: trust"` → `e542a2d` → `git show --stat e542a2d | tail -1` to confirm 3,641 files / 1.16M lines → `git checkout e542a2d -- skills/self-improving/ learning/ skills/wrap-up/`. Each directory restored cleanly because git's content-addressable storage matched the SHA on disk. The recovery commit landed within an hour of the miscommit; the agent's working memory and the case-study that documented the failure both came back. Without reflog, the recovery would have been `git fsck --lost-found` and manual reconstruction — possible but ugly, and only because git had not garbage-collected.
+## When this bit me
+
+A 3,641-file miscommit on the workspace branch was undone with `git reset --hard HEAD~1`. The reset correctly removed the commit but also deleted every file that was added in the miscommit and was untracked before — including a freshly-migrated self-improving bundle, a tier-system shell set, and a `wrap-up` SKILL.md. The recovery was `git reflog | grep "v1.2: trust"` → `e542a2d` → `git show --stat e542a2d | tail -1` to confirm 3,641 files / 1.16M lines → `git checkout e542a2d -- skills/self-improving/ learning/ skills/wrap-up/`. Each directory restored cleanly because git's content-addressable storage matched the SHA on disk. The recovery commit landed within an hour of the miscommit; the agent's working memory and the case-study that documented the failure both came back. Without reflog, the recovery would have been `git fsck --lost-found` and manual reconstruction — possible but ugly, and only because git had not garbage-collected.

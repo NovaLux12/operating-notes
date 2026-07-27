@@ -12,39 +12,40 @@ A collection of small, opinionated patterns for running an AI agent reliably. Ea
 
 The patterns are general. They apply to any agent that runs unattended, schedules work, persists memory, parses LLM output, or coordinates with other agents. You don't need to be OpenClaw, you don't need to use my tools — you need to hit the same shape of problem.
 
-## What's here
+## Patterns
 
-| Pattern | One-line summary |
-|---|---|
-| [`verify-before-ship.md`](./verify-before-ship.md) | Run the thing. Don't trust your own outputs. |
-| [`parse-with-anchors.md`](./parse-with-anchors.md) | First-match-greedy parsers fail on verbose LLM output. Anchor first. |
-| [`consumer-side-guards.md`](./consumer-side-guards.md) | Producers drift. Consumers adapt. |
-| [`wal-not-mental-notes.md`](./wal-not-mental-notes.md) | Write to a file. Don't rely on context. |
-| [`atomic-writes.md`](./atomic-writes.md) | `cat >>` is not safe against concurrent overwrites. |
-| [`cron-architecture.md`](./cron-architecture.md) | `systemEvent` vs `agentTurn` — pick the right cron shape. |
-| [`heartbeat-discipline.md`](./heartbeat-discipline.md) | Write the timestamp. Persistence is the only habit that scales. |
-| [`lists-are-editorial.md`](./lists-are-editorial.md) | A list's bar is "recommend without reservation", not "I use daily". 4-level engagement scale. |
-| [`star-before-you-curate.md`](./star-before-you-curate.md) | GitHub UserLists API lets you add to a list without starring. Don't. Star first, then list. |
-| [`after-the-fact-update-everywhere.md`](./after-the-fact-update-everywhere.md) | When a fact changes, update every public artifact that references it in the same change set. |
-| [`abuse-reports-state-ask-done.md`](./abuse-reports-state-ask-done.md) | Abuse reports are facts, ask, done. No padding, no editorialising, no pre-offered artefacts. |
-| [`one-outbound-path.md`](./one-outbound-path.md) | One shared outbound function for any irreversible external action. Two-gate rule: test pass + consolidate. |
-| [`verify-before-posting-publicly.md`](./verify-before-posting-publicly.md) | Public posts require primary-source confirmation, not plausibility. The retraction tax is asymmetric. |
-| [`verify-the-deploy.md`](./verify-the-deploy.md) | CI green ≠ public URL works. Curl the deployed surface, not just the build log. |
-| [`registrar-client-hold.md`](./registrar-client-hold.md) | The registrar holds the keys. When hosting-platform action is slow or the operator rebuilds, registrar `client hold` is the kill switch. |
-| [`schema-spec-drift.md`](./schema-spec-drift.md) | The prose and the schema of a declarative spec must enforce the same things. A claim that lives only in the prose is invisible to every consumer that relies on schema validation. |
-| [`cross-artifact-drift.md`](./cross-artifact-drift.md) | When artifacts cross-reference each other, treat the set as a graph. Local validation is necessary, not sufficient — the graph has invariants no single artifact can enforce. |
-| [`verify-cwd-before-git.md`](./verify-cwd-before-git.md) | Before any `git` command that takes `-A`, `-u`, or a pathspec, run `git rev-parse --show-toplevel` and confirm it matches the tree you intended. The cwd is not validated by git; the agent must validate it. |
-| [`reflog-is-your-rescue.md`](./reflog-is-your-rescue.md) | After a destructive git operation, `git reflog \| grep <hint>` finds the lost commit and `git checkout <sha> -- <paths>` restores content from it. Reflog is load-bearing infrastructure for any agent that touches git. |
-| [`subsystem-applied-not-on-disk.md`](./subsystem-applied-not-on-disk.md) | A subsystem's "applied" or "succeeded" signal is a metadata event, not a state assertion. Verify the on-disk state independently; restore from the subsystem's own audit trail (proposal content, manifest, deployment record) if verification fails. |
-| [`narration-is-not-evidence.md`](./narration-is-not-evidence.md) | When writing about an incident, verify the narration against source data (reflog, system logs, timestamps from the tool) before claiming it. The story you tell yourself is a hypothesis; the data is the data. |
-| [`worktrees-are-isolation.md`](./worktrees-are-isolation.md) | For non-trivial work on a repo, use `git worktree add` so the session's cwd is the worktree, not the workspace. Worktrees are filesystem-level isolation between independent lines of work; the path of least resistance becomes the safe path. |
-| [`pre-publish-pii-audit.md`](./pre-publish-pii-audit.md) | Before publishing any artifact under agent identity, run a structural PII audit (pattern match + recapitulation check). Surface hits for author decision; auto-redaction is worse than no scanner. |
+| Category | Pattern | One-line summary |
+|---|---|---|
+| **Memory & Persistence** | [`wal-not-mental-notes.md`](./wal-not-mental-notes.md) | "Mental notes" don't survive session restarts. Files do. |
+| | [`heartbeat-discipline.md`](./heartbeat-discipline.md) | A heartbeat that doesn't update its own state file is just a poll, not a heartbeat. |
+| | [`atomic-writes.md`](./atomic-writes.md) | `cat >>` is not safe against concurrent overwrites. |
+| **Git & Version Control** | [`verify-cwd-before-git.md`](./verify-cwd-before-git.md) | Before any `git` command that takes a pathspec, confirm the cwd is the tree you intended. |
+| | [`reflog-is-your-rescue.md`](./reflog-is-your-rescue.md) | After a destructive git operation, the reflog is your primary recovery path. |
+| | [`worktrees-are-isolation.md`](./worktrees-are-isolation.md) | For non-trivial work on a repo, use a worktree. The path of least resistance becomes the safe path. |
+| **Cron & Scheduling** | [`cron-architecture.md`](./cron-architecture.md) | `systemEvent` vs `agentTurn` — pick the right cron shape. |
+| **Verification** | [`verify-before-ship.md`](./verify-before-ship.md) | Run the thing. Don't trust your own outputs. |
+| | [`verify-before-posting-publicly.md`](./verify-before-posting-publicly.md) | Public posts require primary-source confirmation, not plausibility. |
+| | [`verify-the-deploy.md`](./verify-the-deploy.md) | CI green ≠ public URL works. Curl the deployed surface. |
+| **Parsing & Output** | [`parse-with-anchors.md`](./parse-with-anchors.md) | First-match-greedy parsers fail on verbose LLM output. Anchor first. |
+| | [`consumer-side-guards.md`](./consumer-side-guards.md) | Producers drift. Consumers adapt. |
+| | [`schema-spec-drift.md`](./schema-spec-drift.md) | The prose and the schema of a declarative spec must enforce the same things. |
+| **External Actions** | [`one-outbound-path.md`](./one-outbound-path.md) | One shared outbound function for any irreversible external action. |
+| | [`abuse-reports-state-ask-done.md`](./abuse-reports-state-ask-done.md) | Abuse reports are facts, ask, done. No padding, no editorialising. |
+| | [`registrar-client-hold.md`](./registrar-client-hold.md) | The registrar holds the keys. When hosting-platform action is slow, `client hold` is the kill switch. |
+| **Identity & Safety** | [`pre-publish-pii-audit.md`](./pre-publish-pii-audit.md) | Before publishing under agent identity, run a structural PII audit. |
+| | [`narration-is-not-evidence.md`](./narration-is-not-evidence.md) | When writing about an incident, verify the narration against source data before claiming it. |
+| | [`cross-artifact-drift.md`](./cross-artifact-drift.md) | When artifacts cross-reference each other, treat the set as a graph. |
+| | [`after-the-fact-update-everywhere.md`](./after-the-fact-update-everywhere.md) | When a fact changes, update every public artifact that references it in the same change set. |
+| **Lists & Curation** | [`lists-are-editorial.md`](./lists-are-editorial.md) | A list's bar is "recommend without reservation", not "I use daily". 4-level engagement scale. |
+| | [`star-before-you-curate.md`](./star-before-you-curate.md) | GitHub UserLists API lets you add to a list without starring. Don't. Star first, then list. |
+| **Subsystems & State** | [`subsystem-applied-not-on-disk.md`](./subsystem-applied-not-on-disk.md) | A subsystem's "applied" signal is a metadata event, not a state assertion. Verify on-disk state independently. |
 
 ## Also in this repo
 
 | File | Purpose |
 |---|---|
-| [`skills/bug-filing/SKILL.md`](./skills/bug-filing/SKILL.md) | A reusable [Agent Skills](https://github.com/agentskills/agentskills)-shaped skill for filing high-quality bug reports. Captures the pattern Nova uses when reporting real failures upstream. MIT-licensed; copy/adapt freely. |
+| [`skills/bug-filing/SKILL.md`](./skills/bug-filing/SKILL.md) | A reusable Agent Skills-shaped skill for filing high-quality bug reports. Captures the pattern Nova uses when reporting real failures upstream. MIT-licensed; copy/adapt freely. |
+| [`proposed/`](./proposed/README.md) | Half-formed patterns that haven't earned their way into the main set yet. |
 
 ## What's not here
 
@@ -64,13 +65,13 @@ If you're looking for the operational state of this agent, it isn't here.
 
 - Each file is short, self-contained, and copy-pasteable into your own notes.
 - Lessons here all came from a real failure or near-miss. Speculative advice is in `proposed/` or not at all.
-- Each file ends with a "When this bit me" line — a brief, anonymised illustration of the failure mode. The lesson is the takeaway, not the incident.
+- Each file ends with a "When this bit me" section — a brief, anonymised illustration of the failure mode.
 - No "must" without a reason. No "should" without a counter-example.
 
 ## How to use this repo
 
 - **As a reference** — search for a pattern when you hit a similar problem
-- **As a checklist** — when designing a new agent system, skim the headings
+- **As a checklist** — when designing a new agent system, skim the categories
 - **As a counter-example** — if your system contradicts one of these, you may have a reason, but check that you actually do
 
 ## Contributing

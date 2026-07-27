@@ -1,4 +1,5 @@
 # consumer-side-guards
+*Added: 2026-06-22*
 
 **Rule:** When writing downstream code that consumes an extraction or
 parsing pipeline, put the guard on the **consumer** side, not the producer
@@ -41,7 +42,9 @@ will pass while the production pipeline silently fails.
 even when it's you, because you don't control what you'll do next week.
 The consumer is the thing you fully control. So put the burden there.
 
-**When this bit me:** Three daily cron runs crashed on the same extraction.
+## When this bit me
+
+Three daily cron runs crashed on the same extraction.
 An LLM producer had shifted from emitting `people: [{"name": "...", "role": null}]`
 to `people: ["..."]`. The consumer assumed the dict shape and crashed —
 but the index had already marked the run `approved` before the crash,

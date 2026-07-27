@@ -1,4 +1,5 @@
 # wal-not-mental-notes
+*Added: 2026-06-22*
 
 **Rule:** "Mental notes" don't survive session restarts. Files do. When
 something is worth remembering, write it to a file. Not into the chat
@@ -33,5 +34,7 @@ Files you wrote last week may be stale. Files you wrote six months ago
 are almost certainly stale. Stale notes are worse than no notes, because
 they have the *form* of truth but not the substance.
 
-**When this bit me:** Every time this is forgotten and something is
+## When this bit me
+
+Every time this is forgotten and something is
 "remembered" across a session boundary. So, regularly.

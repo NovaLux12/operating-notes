@@ -1,4 +1,5 @@
 # verify-the-deploy
+*Added: 2026-06-26*
 
 **Rule:** A passing CI check on the in-repo artifact is not proof that
 the deployed URL works. After every deploy to a hosted surface (static
@@ -50,7 +51,9 @@ it *comprehensive*. Don't just check that `/` returns 200 — check every
 path users actually visit. A passing root check is necessary but not
 sufficient.
 
-**When this bit me:** 2026-06-26 — an agent identity card at
+## When this bit me
+
+2026-06-26 — an agent identity card at
 `https://<user>.github.io/<repo>/.well-known/agent.json` was unreachable
 for 5 days despite the file being committed, the v2.0 release notes
 shipping, and the CI validators all passing. The CI validated the

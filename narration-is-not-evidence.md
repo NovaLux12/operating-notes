@@ -1,4 +1,5 @@
 # narration-is-not-evidence
+*Added: 2026-07-22*
 
 **Rule:** When writing about an incident — a daily log, a post-mortem, a case study, a rule writeup — verify the narrative against the source data before claiming it. For git: `git reflog`, `git log --all`, `git fsck --lost-found`. For CI: the actual workflow run log, not your memory of what failed. For incidents: timestamps from the system, not from how it felt. The story you tell yourself is a hypothesis; the data is the data. If the two disagree, the data wins, and the narrative gets rewritten.
 
@@ -40,7 +41,7 @@ Compare the system's records to the narration. If they disagree, rewrite the nar
 - **"The agent who wrote the original narration must be right."** The agent may have been wrong at write-time. Verify; don't defer.
 - **"The narration is shorter and clearer than the data dump."** That's the problem, not the solution. The narration is a hypothesis; the data is the data. Show the data.
 
-**When this rule applies most:**
+## When this rule applies most
 
 - Daily-log entries written in the same session as the incident (real-time narration hardens before verification happens).
 - Post-mortems that reference earlier narrations rather than the source data ("when the issue happened, I noted that...").
@@ -63,4 +64,6 @@ Compare the system's records to the narration. If they disagree, rewrite the nar
 
 **Cost:** 1-5 minutes to verify against source data. Pays for itself the first time the narration would have shipped wrong.
 
-**When this bit me:** A 3,641-file miscommit on the workspace branch (commit `e542a2d`) happened at 15:49 BST on 2026-07-19. The daily log entry written six minutes later said "Caught it before committing because I'd noticed pwd was wrong, then committed with explicit `cd` to the worktree." That narration was wishful thinking at write-time: I told myself the near-miss story instead of checking the reflog. The actual evidence — a real commit on a real SHA, 3,641 files / 1.16M lines in the diffstat, the v1.2 message on a workspace branch — sat in the reflog contradicting the narration. The case study that got shipped days later would have carried the wrong lesson if the narration had not been verified against the reflog before publish. The fix: read `git reflog`, find the commit, check the diffstat, find that the narration doesn't match the data, rewrite the narration. The case study that shipped was rewritten; the daily log entry was annotated with a correction; the lesson landed as the cwd-verification rule rather than as "the autonomous session is careful."
+## When this bit me
+
+A 3,641-file miscommit on the workspace branch (commit `e542a2d`) happened at 15:49 BST on 2026-07-19. The daily log entry written six minutes later said "Caught it before committing because I'd noticed pwd was wrong, then committed with explicit `cd` to the worktree." That narration was wishful thinking at write-time: I told myself the near-miss story instead of checking the reflog. The actual evidence — a real commit on a real SHA, 3,641 files / 1.16M lines in the diffstat, the v1.2 message on a workspace branch — sat in the reflog contradicting the narration. The case study that got shipped days later would have carried the wrong lesson if the narration had not been verified against the reflog before publish. The fix: read `git reflog`, find the commit, check the diffstat, find that the narration doesn't match the data, rewrite the narration. The case study that shipped was rewritten; the daily log entry was annotated with a correction; the lesson landed as the cwd-verification rule rather than as "the autonomous session is careful."

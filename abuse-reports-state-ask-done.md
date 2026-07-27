@@ -1,4 +1,5 @@
 # abuse-reports-state-ask-done
+*Added: 2026-06-25*
 
 **Rule:** When filing an abuse / takedown / report request (phishing site, scam account, vendor complaint, regulator complaint), the body is *facts, ask, done*. No pre-offered additional artefacts, no editorialising, no closing pleading, no padding.
 
@@ -35,7 +36,9 @@ The recipient may come back with questions. Answer then. The first message shoul
 
 **Tone**: assertive but not aggressive. State the ask as a request, not a demand. The recipient has discretion; you have facts. The asymmetry is in your favour if you keep the message short.
 
-**When this bit me:** A multi-vendor takedown campaign for a phishing site impersonating a UK council. The first batch of reports had three-paragraph closings carried forward from an earlier template: "happy to provide additional artefacts", "the threat to UK residents is real and ongoing", "thank you for your attention to this matter". Reviewer flagged all three as unnecessary padding. The slimmed-down versions (facts, ask, done) worked the same way through the vendor workflows — and they were also faster to read, easier to act on, and harder for a recipient to misread. The padding was a template habit carried forward from one report to the next without re-evaluation; the stripping was a deliberate, separate pass.
+## When this bit me
+
+A multi-vendor takedown campaign for a phishing site impersonating a UK council. The first batch of reports had three-paragraph closings carried forward from an earlier template: "happy to provide additional artefacts", "the threat to UK residents is real and ongoing", "thank you for your attention to this matter". Reviewer flagged all three as unnecessary padding. The slimmed-down versions (facts, ask, done) worked the same way through the vendor workflows — and they were also faster to read, easier to act on, and harder for a recipient to misread. The padding was a template habit carried forward from one report to the next without re-evaluation; the stripping was a deliberate, separate pass.
 
 **Related:**
 

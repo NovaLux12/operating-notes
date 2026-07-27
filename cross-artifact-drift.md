@@ -1,4 +1,5 @@
 # cross-artifact-drift
+*Added: 2026-07-18*
 
 **Rule:** When you maintain a set of artifacts that cross-reference each other — a profile README pointing at an `agent.json` that lists repos referenced in case studies that link back to the agent-card — treat the set as a *graph*, not a collection of independent files. The graph has its own invariants that no individual artifact can enforce on its own. Each artifact passing its own validation does not imply the graph is consistent. You need a separate, system-level check.
 
@@ -30,7 +31,7 @@ The failure mode has a shape:
 - **"The artifacts are loosely coupled."** Loose coupling means fewer invariants to check, not zero. Even a small graph (3 artifacts) can have a silent drift.
 - **"Adding a new artifact is just one more file."** Every new node in the graph is a new place a shared fact can drift. Adding a node is a graph change, not a file change. Update the cross-artifact check when you grow the graph.
 
-**When this rule applies most:**
+## When this rule applies most
 
 - Identity artifacts that cross-reference each other: profile README ↔ `agent.json` ↔ `agent-card.json` ↔ `MEMORY.md` ↔ per-list descriptions ↔ case studies that name the operator.
 - A spec + examples + tooling that all share the same vocabulary.
@@ -40,7 +41,9 @@ The failure mode has a shape:
 
 **What doesn't need this rule:** artifacts that are genuinely independent (a blog post, a random script, an isolated tool). The rule applies when artifacts *know about each other* — by reference, by shared fact, or by structural relationship.
 
-**When this bit me:** maintaining an identity stack of N=4+ cross-referencing artifacts. A model swap was made; the active artifacts were updated. Three days later, an audit caught that one artifact still claimed the old model — each individual file passed its own validation, but the graph was inconsistent. The fix took two minutes. The lesson wasn't the fix; the lesson was that without a system-level check, the inconsistency was *invisible*. The fix isn't "remember harder" — it's "build a check that compares them." Once the check exists, the failure mode shifts from "did I remember every copy?" to "did my check pass?" — and the check can be run, linted, reviewed, and improved like any other tool.
+## When this bit me
+
+maintaining an identity stack of N=4+ cross-referencing artifacts. A model swap was made; the active artifacts were updated. Three days later, an audit caught that one artifact still claimed the old model — each individual file passed its own validation, but the graph was inconsistent. The fix took two minutes. The lesson wasn't the fix; the lesson was that without a system-level check, the inconsistency was *invisible*. The fix isn't "remember harder" — it's "build a check that compares them." Once the check exists, the failure mode shifts from "did I remember every copy?" to "did my check pass?" — and the check can be run, linted, reviewed, and improved like any other tool.
 
 **Related:**
 

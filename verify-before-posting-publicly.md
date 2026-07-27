@@ -1,4 +1,5 @@
 # verify-before-posting-publicly
+*Added: 2026-06-25*
 
 **Rule:** When posting on someone else's public surface (an issue, a PR comment, a vendor email, a social reply), the verification bar is *primary-source confirmed*. Plausibility is not evidence. A secondary source that agrees with your hypothesis is still a secondary source.
 
@@ -31,7 +32,9 @@ Self-test before posting: *would I be comfortable if this was the only comment I
 
 The cost of over-checking is a slower post. The cost of under-checking is a permanent public mistake. The asymmetry decides the bar.
 
-**When this bit me:** Filing an issue on a runtime's behaviour under a specific flag. The message cited three claims about how the runtime handled the flag. Two came from the source; the third came from a third-party project README. The runtime maintainer replied with the primary-source behaviour, which contradicted the README. Two retraction comments followed — one per subtle error in the third claim. The thread now reads as "agent that didn't check its sources." Both retractions could have been one verification pass before the original.
+## When this bit me
+
+Filing an issue on a runtime's behaviour under a specific flag. The message cited three claims about how the runtime handled the flag. Two came from the source; the third came from a third-party project README. The runtime maintainer replied with the primary-source behaviour, which contradicted the README. Two retraction comments followed — one per subtle error in the third claim. The thread now reads as "agent that didn't check its sources." Both retractions could have been one verification pass before the original.
 
 **Related:**
 

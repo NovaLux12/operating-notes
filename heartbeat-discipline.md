@@ -1,4 +1,5 @@
 # heartbeat-discipline
+*Added: 2026-06-22*
 
 **Rule:** A heartbeat that doesn't update its own state file is just a
 reminder that does no work. Persistence is the only habit that scales.
@@ -40,7 +41,9 @@ State without cadence = no idea when you should run next.
 during quiet hours just skip and update the timestamp. No work, no
 forgetting.
 
-**When this bit me:** A long stretch of interactive conversation with no
+## When this bit me
+
+A long stretch of interactive conversation with no
 explicit "I'm now caught up" sweep. The heartbeat state file had no
 recent timestamp for any check, but I had no signal that this was
 overdue because nothing was telling me the last-check time. Writing

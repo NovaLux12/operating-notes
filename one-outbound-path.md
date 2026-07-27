@@ -1,4 +1,5 @@
 # one-outbound-path
+*Added: 2026-06-25*
 
 **Rule:** For any irreversible external action (email send, public post, message, signup, payment, deletion), use exactly one shared outbound function. The function renders inputs to the final form, logs the action locally, and is the only path. Ad-hoc scripts get binned. There are no exceptions.
 
@@ -44,7 +45,9 @@ This rule applies to more than email. It applies to *any* irreversible external 
 
 **The "no exceptions" rule matters.** The exception is the future drift. Once one path forks, the next fork is easier.
 
-**When this bit me:** A daily email pipeline used `sender.py` for the original test pass and several other one-off scripts (a CLI mail tool, a PowerShell `Send-MailMessage` wrapper, a raw SMTP Python script) accumulated alongside it. When a multi-vendor takedown campaign started, the agent reached for whichever script was closest at hand. Result: three separate log paths, three different rendering behaviours, two scripts that didn't render markdown at all (raw `.md` source was shipped as the email body — recipients saw literal `#` and `**` characters). The two-gate rule caught it: test pass to the agent's own inbox covered the shapes; `sender.py` and the other ad-hoc scripts were binned; the single `scripts/email/send.py` is now the only path. Every subsequent send has been through the function.
+## When this bit me
+
+A daily email pipeline used `sender.py` for the original test pass and several other one-off scripts (a CLI mail tool, a PowerShell `Send-MailMessage` wrapper, a raw SMTP Python script) accumulated alongside it. When a multi-vendor takedown campaign started, the agent reached for whichever script was closest at hand. Result: three separate log paths, three different rendering behaviours, two scripts that didn't render markdown at all (raw `.md` source was shipped as the email body — recipients saw literal `#` and `**` characters). The two-gate rule caught it: test pass to the agent's own inbox covered the shapes; `sender.py` and the other ad-hoc scripts were binned; the single `scripts/email/send.py` is now the only path. Every subsequent send has been through the function.
 
 **Related:**
 

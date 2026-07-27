@@ -1,4 +1,5 @@
 # worktrees-are-isolation
+*Added: 2026-07-22*
 
 **Rule:** When working on non-trivial changes to a repository, do the work in a `git worktree add` — a separate working tree on a separate branch — rather than in the main checkout. Worktrees are filesystem-level isolation between independent lines of work. The main checkout is for work you're actively shipping; a worktree is for work you're staging.
 
@@ -37,7 +38,7 @@ For parallel builders on a shared repo, each gets its own worktree. Files touche
 - **"I'll merge main into my branch when I'm ready."** That's what `git pull --rebase` is for. Worktrees don't prevent rebasing; they just isolate the working tree.
 - **"Worktrees are for big features."** Worktrees are for any non-trivial change. The "trivial" boundary is below the size where mistakes are likely; worktrees are cheap to set up; use them.
 
-**When this rule applies most:**
+## When this rule applies most
 
 - Any work on a repo where the agent's default cwd is somewhere else (the workspace, the home directory, a different repo).
 - Parallel agent sessions touching the same repo — each gets its own worktree to prevent stomping.
@@ -59,4 +60,6 @@ For parallel builders on a shared repo, each gets its own worktree. Files touche
 
 **Cost:** 5 seconds to create a worktree; the worktree directory persists until cleaned up. Pays for itself the first time the cwd-miscommit failure mode is prevented.
 
-**When this bit me:** The 2026-07-19 cwd-miscommit incident (3,641 files committed to the workspace branch) was the canonical case where the worktree rule would have prevented the failure. The autonomous session was meant to drive `NovaLux12/agent-identity-kit` v1.2 forward; the session's cwd was the workspace; no worktree was set up; `git add -A` walked the workspace and staged everything in it. The commit landed with the agent-identity-kit message on the workspace branch. The recovery was real but expensive (reflog + manual restoration of the untracked self-improving bundle). The fix going forward: any work on a public repo goes through a worktree; the orchestrator or agent sets up the worktree before the work begins; the session's cwd is the worktree path; the `git rev-parse --show-toplevel` check passes without ceremony because the worktree *is* the expected root. The case study that documented the failure and the operating-notes pattern that captured the rule were themselves written in worktrees (`/home/jack/.tmp/case-studies-cwd-wt` and `/home/jack/.tmp/opnotes-patterns-wt`) — practicing the rule while documenting it.
+## When this bit me
+
+The 2026-07-19 cwd-miscommit incident (3,641 files committed to the workspace branch) was the canonical case where the worktree rule would have prevented the failure. The autonomous session was meant to drive `NovaLux12/agent-identity-kit` v1.2 forward; the session's cwd was the workspace; no worktree was set up; `git add -A` walked the workspace and staged everything in it. The commit landed with the agent-identity-kit message on the workspace branch. The recovery was real but expensive (reflog + manual restoration of the untracked self-improving bundle). The fix going forward: any work on a public repo goes through a worktree; the orchestrator or agent sets up the worktree before the work begins; the session's cwd is the worktree path; the `git rev-parse --show-toplevel` check passes without ceremony because the worktree *is* the expected root. The case study that documented the failure and the operating-notes pattern that captured the rule were themselves written in worktrees (`/home/jack/.tmp/case-studies-cwd-wt` and `/home/jack/.tmp/opnotes-patterns-wt`) — practicing the rule while documenting it.

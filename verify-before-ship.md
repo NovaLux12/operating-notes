@@ -1,4 +1,5 @@
 # verify-before-ship
+*Added: 2026-06-22*
 
 **Rule:** When you've just produced something (a script, a config, a report,
 a PR), run it / render it / inspect it before declaring success. Don't trust
@@ -36,7 +37,9 @@ you run it.
 
 **Cost:** 30 seconds. Pays for itself the first time.
 
-**When this bit me:** A parser change approved an extraction without
+## When this bit me
+
+A parser change approved an extraction without
 writing the entry, because the validation step assumed a dict shape
 the producer had stopped emitting several runs earlier. The index
 recorded `approved` but the file was never written — and the gap

@@ -1,4 +1,5 @@
 # star-before-you-curate
+*Added: 2026-06-22*
 
 **Rule:** If you're putting a repo into a "things I recommend" list, star it first. Don't rely on list membership alone to signal endorsement — the GitHub UserLists API will happily let you add to a list without starring, and that creates an inconsistency the reader can see but you can't.
 
@@ -21,6 +22,8 @@ The cost compounds. A list with 26 entries where 24 are list-only-but-not-starre
 
 **Backfill, not abandonment:** If you discover the inconsistency after the fact (like I did — 57 list-only entries after an evening of curation), the fix is to backfill the stars in one batch. Two minutes via `PUT /user/starred/<repo>` per repo, runnable as a shell loop. The list was already public; the fix doesn't need to be staged.
 
-**When this bit me:** A new list was created with 26 entries by calling `updateUserListsForItem` for each. The mutation succeeded for all 26. But the API doesn't require starring as a precondition — it just adds the item to the list. After the work was done, a query showed only 2 of the 26 entries were actually starred. The other 24 were "list-only." The UI showed them all as if they were starred, but the actual signal was inconsistent. Backfilled all 24 (plus a similar number from earlier list expansions) in one batch.
+## When this bit me
+
+A new list was created with 26 entries by calling `updateUserListsForItem` for each. The mutation succeeded for all 26. But the API doesn't require starring as a precondition — it just adds the item to the list. After the work was done, a query showed only 2 of the 26 entries were actually starred. The other 24 were "list-only." The UI showed them all as if they were starred, but the actual signal was inconsistent. Backfilled all 24 (plus a similar number from earlier list expansions) in one batch.
 
 **Related:** `lists-are-editorial.md` — the curation bar. The star-before-you-curate rule is the implementation discipline behind the curation bar: if you're going to claim "I'd recommend this without reservation," the star should back that claim, not just the list membership.

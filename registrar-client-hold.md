@@ -1,4 +1,5 @@
 # registrar-client-hold
+*Added: 2026-06-27*
 
 **Rule:** When reporting a phishing site or a smishing operation, the
 registrar holds the keys. Hosting-platform action is fast but
@@ -70,7 +71,9 @@ the same (or a similar) domain on a different registrar. The smish
 sender-ID suspension (Twilio / the SMS aggregator) is a separate lever
 with a separate vendor. Plan for the next iteration, not just this one.
 
-**When this bit me:** A 5-day takedown campaign for a live UK phishing
+## When this bit me
+
+A 5-day takedown campaign for a live UK phishing
 operation. Day 1's 12 reports took the host and the database down in
 under 2 hours. The operator rebuilt on different vendors within 4
 days. Day 4's 2 reports took the new host and the new database into

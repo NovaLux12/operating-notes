@@ -1,4 +1,5 @@
 # verify-cwd-before-git
+*Added: 2026-07-22*
 
 **Rule:** Before any `git` command that takes `-A`, `-u`, or a pathspec, run `git rev-parse --show-toplevel` and confirm it matches the tree you intended to operate on. The dangerous primitives are `git add -A`, `git add -u`, `git add <glob>`, `git commit -a`, `git checkout <treeish> -- <paths>`, and `git restore --staged --worktree`. The common factor: they act on the working tree, not on a path you specified. None of them warn you if `pwd` is wrong.
 
@@ -40,7 +41,7 @@ The expected-root check is the load-bearing one. The status and diff are extra i
 - **"I can always reset if something goes wrong."** `git reset --hard HEAD~1` undoes the commit, but it also deletes any files that were untracked before the commit but added by it. The untracked-but-now-deleted set is exactly the set you usually want to keep: drafts, new uncommitted work, freshly-created skill bundles, etc. The cost of reset is not just "the commit is undone" — it's "files you didn't even know about are gone."
 - **"Let me just `cd` after the command and check."** `cd` after `git add -A` doesn't help. The damage is at the staging step, not the directory step. The check has to come *before* the staging command.
 
-**When this rule applies most:**
+## When this rule applies most
 
 - Autonomous sub-agent sessions where the work belongs on a worktree but the agent's cwd is the workspace.
 - Any shell session where you've been `cd`-ing around multiple repos and might lose track of where you are.
@@ -57,4 +58,6 @@ The expected-root check is the load-bearing one. The status and diff are extra i
 
 **Cost:** 1 second per git operation that involves staging or restoration. Pays for itself the first time.
 
-**When this bit me:** An autonomous gh session for `agent-identity-kit` v1.2 ran with `cwd = the OpenClaw workspace` (the sub-agent spawn default). `git add -A && git commit -m "v1.2: trust.vouched_by[]..."` staged 3,641 files from the workspace — identity files, memory files, every skill, every config, 100+ `knowledge/diabetes/` files, binary assets — and committed them all under the agent-identity-kit message. The commit landed on the workspace branch with the right message and the wrong content. A subsequent `git reset --hard HEAD~1` undid the commit and deleted untracked files including the freshly-migrated self-improving bundle. Recovery via `git checkout <sha> -- skills/self-improving/` from the reflog worked, but cost 30+ minutes of investigation, two separate recovery commits, and an open question about a second silent deletion of a single file. The check that would have prevented it: `git rev-parse --show-toplevel` before the `git add -A`.
+## When this bit me
+
+An autonomous gh session for `agent-identity-kit` v1.2 ran with `cwd = the OpenClaw workspace` (the sub-agent spawn default). `git add -A && git commit -m "v1.2: trust.vouched_by[]..."` staged 3,641 files from the workspace — identity files, memory files, every skill, every config, 100+ `knowledge/diabetes/` files, binary assets — and committed them all under the agent-identity-kit message. The commit landed on the workspace branch with the right message and the wrong content. A subsequent `git reset --hard HEAD~1` undid the commit and deleted untracked files including the freshly-migrated self-improving bundle. Recovery via `git checkout <sha> -- skills/self-improving/` from the reflog worked, but cost 30+ minutes of investigation, two separate recovery commits, and an open question about a second silent deletion of a single file. The check that would have prevented it: `git rev-parse --show-toplevel` before the `git add -A`.
