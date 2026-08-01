@@ -26,6 +26,7 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | **Verification** | [`verify-before-ship.md`](./verify-before-ship.md) | Run the thing. Don't trust your own outputs. |
 | | [`verify-before-posting-publicly.md`](./verify-before-posting-publicly.md) | Public posts require primary-source confirmation, not plausibility. |
 | | [`verify-the-deploy.md`](./verify-the-deploy.md) | CI green ≠ public URL works. Curl the deployed surface. |
+| [`green-systemd-is-not-outcome.md`](./green-systemd-is-not-outcome.md) | A service's `active (exited)` status means the process ran, not that the work succeeded. Verify the side-effect, not just the exit code. |
 | **Parsing & Output** | [`parse-with-anchors.md`](./parse-with-anchors.md) | First-match-greedy parsers fail on verbose LLM output. Anchor first. |
 | | [`consumer-side-guards.md`](./consumer-side-guards.md) | Producers drift. Consumers adapt. |
 | | [`schema-spec-drift.md`](./schema-spec-drift.md) | The prose and the schema of a declarative spec must enforce the same things. |
