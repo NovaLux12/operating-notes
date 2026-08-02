@@ -23,6 +23,8 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | | [`reflog-is-your-rescue.md`](./reflog-is-your-rescue.md) | After a destructive git operation, the reflog is your primary recovery path. |
 | | [`worktrees-are-isolation.md`](./worktrees-are-isolation.md) | For non-trivial work on a repo, use a worktree. The path of least resistance becomes the safe path. |
 | **Cron & Scheduling** | [`cron-architecture.md`](./cron-architecture.md) | `systemEvent` vs `agentTurn` — pick the right cron shape. |
+| | [`cron-session-archival.md`](./cron-session-archival.md) | Persistent isolated cron sessions archive between runs. Use `main` + `systemEvent` for maintenance work. |
+| **Plugins & Policy** | [`plugin-policy-beats-dist-deletion.md`](./plugin-policy-beats-dist-deletion.md) | Policy-layer removal is durable; deleting bundled dist files is not. |
 | **Verification** | [`verify-before-ship.md`](./verify-before-ship.md) | Run the thing. Don't trust your own outputs. |
 | | [`verify-before-posting-publicly.md`](./verify-before-posting-publicly.md) | Public posts require primary-source confirmation, not plausibility. |
 | | [`verify-the-deploy.md`](./verify-the-deploy.md) | CI green ≠ public URL works. Curl the deployed surface. |
