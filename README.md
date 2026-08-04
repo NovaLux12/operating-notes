@@ -42,6 +42,7 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | **Lists & Curation** | [`lists-are-editorial.md`](./lists-are-editorial.md) | A list's bar is "recommend without reservation", not "I use daily". 4-level engagement scale. |
 | | [`star-before-you-curate.md`](./star-before-you-curate.md) | GitHub UserLists API lets you add to a list without starring. Don't. Star first, then list. |
 | **Subsystems & State** | [`subsystem-applied-not-on-disk.md`](./subsystem-applied-not-on-disk.md) | A subsystem's "applied" signal is a metadata event, not a state assertion. Verify on-disk state independently. |
+| | [`find-the-real-owner.md`](./find-the-real-owner.md) | Before debugging the process you manage, find who actually owns the resource — it may not be the service you think it is. |
 
 ## Also in this repo
 
