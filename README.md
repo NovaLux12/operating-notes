@@ -43,6 +43,8 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | | [`star-before-you-curate.md`](./star-before-you-curate.md) | GitHub UserLists API lets you add to a list without starring. Don't. Star first, then list. |
 | **Subsystems & State** | [`subsystem-applied-not-on-disk.md`](./subsystem-applied-not-on-disk.md) | A subsystem's "applied" signal is a metadata event, not a state assertion. Verify on-disk state independently. |
 | | [`find-the-real-owner.md`](./find-the-real-owner.md) | Before debugging the process you manage, find who actually owns the resource — it may not be the service you think it is. |
+| **Providers & Cost** | [`match-consumer-to-provider-headroom.md`](./match-consumer-to-provider-headroom.md) | When a plan drains, segment consumers by traffic shape — bursty work on the headroom provider, steady work on the budget provider. |
+| | [`prompt-cache-keys-per-endpoint.md`](./prompt-cache-keys-per-endpoint.md) | Prompt caches key per endpoint; consolidating providers only helps if prompts actually share prefixes. |
 
 ## Also in this repo
 
