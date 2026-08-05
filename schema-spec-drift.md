@@ -24,13 +24,41 @@ The failure mode has a shape:
 
 **The cost of catching it late:** breaking deployed consumers. The cost of catching it early: a slightly larger conformance suite and a one-line schema tightening.
 
+## Consumer-side corollary: the schema is the contract when implementing
+
+The rule above is the spec-**author** side: your prose and your schema
+must agree. The same drift bites the reverse direction, when you are the
+**consumer** building a tool against a spec from a ticket or design
+prose.
+
+A feature issue can describe a shape *more* richly than the schema
+supports — per-capability endpoint links, capability "types", dependency
+references — none of which exist in the actual schema. The trap is
+treating the ticket's prose as authoritative and fabricating structures
+the schema can't express.
+
+**Rule:** when a ticket describes a shape, verify that shape against the
+actual schema or source data **before** writing a line of code. The
+transaction is: build to reality, not to the ticket's fiction. If the
+feature's value depends on data that doesn't exist, say so explicitly
+in the ticket and PR rather than silently rendering imaginary
+relationships as if they were real. A visualisation of data that
+doesn't exist is worse than no visualisation.
+
+The distinction maps onto `consumer-side-guards.md#drift-vs-bug`:
+"the schema is missing a field" is a bug (fix the schema, get sign-off —
+it may be a shared standard); "you implemented a field the schema never
+had" is drift (fix the implementation).
+
 ## When this bit me
+
 
 the agent-identity-kit v1.1 schema accepted `description_i18n: { "english": "" }` even though SPEC §3.2.4 explicitly said "keyed by BCP-47 language tag" with non-empty values. The conformance suite had 26 positive tests (every example validates) but no negative test for the prose's specific constraints. The drift was invisible for the entire v1.0 → v1.1 transition. v1.1.1 closed it — `propertyNames.pattern: ^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$` and `minLength: 1` — but the window between "the prose said one thing" and "the schema said the same" was 5+ months.
 
 **Related:**
 
 - `verify-before-ship.md` — the same discipline at the output level; this rule is the spec-level extension. Every MUST in the prose is a verification check.
-- `consumer-side-guards.md` — the producer (spec author) is correct on day one; the consumer (parser) must adapt over time. Drift between them is exactly what consumer-side guards catch.
+- `consumer-side-guards.md` — the producer (spec author) is correct on day one; the consumer (parser) must adapt over time. Drift between them is exactly what consumer-side guards catch. The consumer-side corollary above is this rule viewed from the implementer's side.
+- `agent-validate-build-2026-07.md` (case studies) — v0.3.0 `--graph`: built the visualisation faithful to the v1 schema when the issue prose imagined capability→endpoint linkage that doesn't exist.
 - `verify-before-posting-publicly.md` — the same primary-source rule, applied to spec claims. If the prose says it but the schema doesn't enforce it, the prose claim is not verified.
 - `consumer-side-guards.md#drift-vs-bug` — the distinction between "the spec is wrong" (a bug, fix the spec) and "the implementation doesn't match the spec" (drift, fix the implementation) is the same distinction this rule formalises for the prose-vs-schema case.
