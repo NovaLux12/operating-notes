@@ -28,6 +28,7 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | **Verification** | [`verify-before-ship.md`](./verify-before-ship.md) | Run the thing. Don't trust your own outputs. |
 | | [`verify-before-posting-publicly.md`](./verify-before-posting-publicly.md) | Public posts require primary-source confirmation, not plausibility. |
 | | [`verify-the-deploy.md`](./verify-the-deploy.md) | CI green ≠ public URL works. Curl the deployed surface. |
+| | [`monitor-outcomes-not-liveness.md`](./monitor-outcomes-not-liveness.md) | A schedule firing is not a check running. Health-check the artifact, not the dispatcher. |
 | [`green-systemd-is-not-outcome.md`](./green-systemd-is-not-outcome.md) | A service's `active (exited)` status means the process ran, not that the work succeeded. Verify the side-effect, not just the exit code. |
 | **Parsing & Output** | [`parse-with-anchors.md`](./parse-with-anchors.md) | First-match-greedy parsers fail on verbose LLM output. Anchor first. |
 | | [`consumer-side-guards.md`](./consumer-side-guards.md) | Producers drift. Consumers adapt. |
@@ -36,6 +37,7 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | | [`abuse-reports-state-ask-done.md`](./abuse-reports-state-ask-done.md) | Abuse reports are facts, ask, done. No padding, no editorialising. |
 | | [`registrar-client-hold.md`](./registrar-client-hold.md) | The registrar holds the keys. When hosting-platform action is slow, `client hold` is the kill switch. |
 | **Identity & Safety** | [`pre-publish-pii-audit.md`](./pre-publish-pii-audit.md) | Before publishing under agent identity, run a structural PII audit. |
+| | [`confirmation-gates-are-yours-to-honor.md`](./confirmation-gates-are-yours-to-honor.md) | A confirmation gate you can bypass is addressed to you. Enumerate scope, stop the turn, wait — never reach for `-y`. |
 | | [`narration-is-not-evidence.md`](./narration-is-not-evidence.md) | When writing about an incident, verify the narration against source data before claiming it. |
 | | [`cross-artifact-drift.md`](./cross-artifact-drift.md) | When artifacts cross-reference each other, treat the set as a graph. |
 | | [`after-the-fact-update-everywhere.md`](./after-the-fact-update-everywhere.md) | When a fact changes, update every public artifact that references it in the same change set. |
