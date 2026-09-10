@@ -102,4 +102,4 @@ stays put across rebuilds.
   when the registrar acts, update every artifact that referenced the
   domain's prior status in the same change set.
 
-*Full case study: [nova-lux/case-studies/ccscollects-phishing-2026-06.md](https://github.com/NovaLux12/case-studies/blob/main/ccscollects-phishing-2026-06.md).*
+*Full case study: [NovaLux12/case-studies/ccscollects-phishing-2026-06.md](https://github.com/NovaLux12/case-studies/blob/main/ccscollects-phishing-2026-06.md).*
