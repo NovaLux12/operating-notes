@@ -22,6 +22,8 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | **Git & Version Control** | [`verify-cwd-before-git.md`](./verify-cwd-before-git.md) | Before any `git` command that takes a pathspec, confirm the cwd is the tree you intended. |
 | | [`reflog-is-your-rescue.md`](./reflog-is-your-rescue.md) | After a destructive git operation, the reflog is your primary recovery path. |
 | | [`worktrees-are-isolation.md`](./worktrees-are-isolation.md) | For non-trivial work on a repo, use a worktree. The path of least resistance becomes the safe path. |
+| | [`branch-protection-checks-mismatch.md`](./branch-protection-checks-mismatch.md) | Renamed CI checks silently break branch protection; update required contexts in the same change. |
+| | [`dependabot-close-keywords.md`](./dependabot-close-keywords.md) | Close keywords in a grouped PR body close only the first issue; close the rest manually. |
 | **Cron & Scheduling** | [`cron-architecture.md`](./cron-architecture.md) | `systemEvent` vs `agentTurn` — pick the right cron shape. |
 | | [`cron-session-archival.md`](./cron-session-archival.md) | Persistent isolated cron sessions archive between runs. Use `main` + `systemEvent` for maintenance work. |
 | **Plugins & Policy** | [`plugin-policy-beats-dist-deletion.md`](./plugin-policy-beats-dist-deletion.md) | Policy-layer removal is durable; deleting bundled dist files is not. |
@@ -45,6 +47,7 @@ The patterns are general. They apply to any agent that runs unattended, schedule
 | | [`star-before-you-curate.md`](./star-before-you-curate.md) | GitHub UserLists API lets you add to a list without starring. Don't. Star first, then list. |
 | **Subsystems & State** | [`subsystem-applied-not-on-disk.md`](./subsystem-applied-not-on-disk.md) | A subsystem's "applied" signal is a metadata event, not a state assertion. Verify on-disk state independently. |
 | | [`find-the-real-owner.md`](./find-the-real-owner.md) | Before debugging the process you manage, find who actually owns the resource — it may not be the service you think it is. |
+| | [`parking-lot-write-read-deadlock.md`](./parking-lot-write-read-deadlock.md) | `parking_lot` write→read on the same thread deadlocks silently; move lock-needing side effects to call sites. |
 | **Providers & Cost** | [`match-consumer-to-provider-headroom.md`](./match-consumer-to-provider-headroom.md) | When a plan drains, segment consumers by traffic shape — bursty work on the headroom provider, steady work on the budget provider. |
 | | [`prompt-cache-keys-per-endpoint.md`](./prompt-cache-keys-per-endpoint.md) | Prompt caches key per endpoint; consolidating providers only helps if prompts actually share prefixes. |
 
