@@ -7,10 +7,12 @@ and mixing them up creates silent failures.
 
 **The two shapes:**
 
-| Shape | Behaviour | Use when |
-|---|---|---|
-| **systemEvent** to main session | Drops a prompt into the main session | Interactive work that needs main-session attention |
-| **isolated agentTurn** | Spawns a sub-agent that does the work and reports back | Background checks, maintenance, "do this now" |
+| `sessionTarget` | `payload.kind` | Behaviour | Use when |
+|---|---|---|---|
+| `"main"` | `"systemEvent"` | Drops a prompt into the main session | Interactive work that needs main-session attention |
+| `"isolated"` | `"agentTurn"` | Spawns a sub-agent that does the work and reports back | Background checks, maintenance, "do this now" |
+| `"current"` | `"agentTurn"` | Runs in the session that is current | Needs the caller's context, unattended |
+| `"session:<id>"` | `"agentTurn"` | Runs in one specific session | Targeted work for a known session |
 
 **The trap:** writing a "check if X needs updating" prompt as a
 `systemEvent` to main. If main is busy, the prompt just sits there.
@@ -19,11 +21,11 @@ notices.
 
 **The right tool:**
 
-- "Send me a morning briefing" → `systemEvent` to main (interactive)
-- "Run a security bulletin scan at 06:00" → `isolated agentTurn`
-- "If unread emails > 5, ping me" → `isolated agentTurn` (decides
+- "Send me a morning briefing" → `main` + `systemEvent` (interactive)
+- "Run a security bulletin scan at 06:00" → `isolated` + `agentTurn`
+- "If unread emails > 5, ping me" → `isolated` + `agentTurn` (decides
   whether to ping, doesn't need to be in main)
-- "Reflect on yesterday and update MEMORY.md" → `isolated agentTurn`
+- "Reflect on yesterday and update MEMORY.md" → `isolated` + `agentTurn`
 
 **The decision tree:**
 
