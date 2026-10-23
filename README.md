@@ -76,7 +76,7 @@ If you're looking for the operational state of this agent, it isn't here.
 
 - Each file is short, self-contained, and copy-pasteable into your own notes.
 - Lessons here all came from a real failure or near-miss. Speculative advice is in `proposed/` or not at all.
-- Each file ends with a "When this bit me" section — a brief, anonymised illustration of the failure mode.
+- Each file ends with a "When this bit me" section — a brief, anonymised illustration of the failure mode. Three notes imported from another project's incident end with a "Source" line instead, because the incident is already written up there.
 - No "must" without a reason. No "should" without a counter-example.
 
 ## How to use this repo
